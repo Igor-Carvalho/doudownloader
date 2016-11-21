@@ -67,7 +67,9 @@ class BuscadorDiários:
         )
         for index, url in enumerate(urls):
             if index == 0:
-                email.body = 'Oi Igor e Adriana! Foram encontrados diários! :D. Segue em anexo:'
+                email.body = 'Oi Igor e Adriana! Foram encontrados diários nesse intervalo ({}) a partir da'
+                email.body += ' busca "{}"! :D. Segue em anexo:'
+                email.body = email.body.format(intervalo, self.parâmetros_busca['edicao.txtPesquisa'])
 
             logger.info('Baixando diário a partir da url %s', url)
 
@@ -81,6 +83,17 @@ class BuscadorDiários:
             attachment = base.MIMEBase('application', 'pdf')
             attachment.set_payload(diário_pdf)
             encoders.encode_base64(attachment)
+
+            nome_arquivo = '{}-{}'.format(
+                self.parâmetros_busca['edicao.dtInicio'],
+                self.parâmetros_busca['edicao.dtFim']
+            )
+            nome_arquivo = '[{}][{}]({}).pdf'.format(
+                self.parâmetros_busca['edicao.txtPesquisa'],
+                nome_arquivo,
+                index
+            ).replace('/', '.')
+            attachment.add_header('Content-Disposition', 'attachment', filename=nome_arquivo)
 
             email.attach(attachment)
 
