@@ -55,7 +55,7 @@ class BuscadorDiários:
             self.parâmetros_busca['edicao.dtFim'],
             self.parâmetros_busca['edicao.ano'],
         )
-        subject = 'Oi Igor e Adriana! Nenhum diario foi encontrado nesse intervalo ({}) a partir da busca '
+        subject = 'Oi Igor! Nenhum diario foi encontrado nesse intervalo ({}) a partir da busca '
         subject += '"{}" :/. Amanhã procuro novamente!'
         subject = subject.format(intervalo, self.parâmetros_busca['edicao.txtPesquisa'])
 
@@ -67,7 +67,7 @@ class BuscadorDiários:
         )
         for index, url in enumerate(urls):
             if index == 0:
-                email.body = 'Oi Igor e Adriana! Foram encontrados diários nesse intervalo ({}) a partir da'
+                email.body = 'Oi Igor! Foram encontrados diários nesse intervalo ({}) a partir da'
                 email.body += ' busca "{}"! :D. Segue em anexo:'
                 email.body = email.body.format(intervalo, self.parâmetros_busca['edicao.txtPesquisa'])
 
