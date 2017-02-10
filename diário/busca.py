@@ -73,11 +73,6 @@ class BuscadorDiários:
 
             logger.info('Baixando diário a partir da url %s', url)
 
-            nome_arquivo = '{}-{}'.format(
-                self.parâmetros_busca['edicao.dtInicio'],
-                self.parâmetros_busca['edicao.dtFim']
-            )
-            nome_arquivo = '{}({}).pdf'.format(nome_arquivo, index).replace('/', '.')
             diário_pdf = requests.get(url).content
 
             attachment = base.MIMEBase('application', 'pdf')
